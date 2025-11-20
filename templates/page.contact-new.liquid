@@ -1,0 +1,354 @@
+{% layout 'theme-landing' %}
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+  <p>FOR YOUR CONVENIENCE WE ARE NOW OFFERING AFTER PAY AND SHOP PAY PAYMENT OPTIONS.</p>
+</div>
+
+<style>
+  /* Announcement Bar */
+  .announcement-bar {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    padding: 12px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .announcement-bar p {
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .contact-hero {
+    background: linear-gradient(135deg, rgba(64, 250, 211, 0.1) 0%, rgba(145, 189, 228, 0.1) 33%, rgba(210, 141, 243, 0.1) 66%, rgba(253, 110, 252, 0.1) 100%);
+    padding: 80px 20px 60px;
+    text-align: center;
+  }
+
+  .contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .contact-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .contact-subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .contact-intro {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .contact-info-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .contact-info-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .contact-info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(64, 250, 211, 0.2);
+    border: 2px solid #40fad3;
+  }
+
+  .contact-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .contact-info-card h3 {
+    font-size: 1.3rem;
+    background: linear-gradient(90deg, #40fad3 0%, #fd6efc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .contact-info-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .contact-info-card a {
+    color: #40fad3;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .contact-info-card a:hover {
+    color: #fd6efc;
+  }
+
+  .contact-info-card-centered {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .contact-form-section {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+  }
+
+  .contact-form-section h2 {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #40fad3 0%, #fd6efc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #40fad3;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .form-submit {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .submit-button {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    color: white;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(64, 250, 211, 0.3);
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(64, 250, 211, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .announcement-bar p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .contact-title {
+      font-size: 2.5rem;
+    }
+
+    .contact-subtitle {
+      font-size: 1.2rem;
+    }
+
+    .contact-form-section {
+      padding: 30px 20px;
+    }
+
+    .contact-info-grid {
+      align-items: stretch;
+    }
+
+    .contact-info-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info-card-centered {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<div class="contact-hero">
+  <h1 class="contact-title">Contact Us</h1>
+  <p class="contact-subtitle">We'd Love to Hear From You!</p>
+</div>
+
+<div class="contact-container">
+  <p class="contact-intro">
+    Have a question, custom order request, or just want to say hello? We're here to help! Reach out to us using the information below or fill out the contact form, and we'll get back to you as soon as possible.
+  </p>
+
+  <div class="contact-info-grid">
+    <div class="contact-info-row">
+      <div class="contact-info-card">
+        <div class="contact-icon">📞</div>
+        <h3>Phone</h3>
+        <p>Give us a call!</p>
+        <a href="tel:803-707-5667">803-707-5667</a>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">✉️</div>
+        <h3>Email</h3>
+        <p>Send us a message</p>
+        <a href="mailto:christcenteredcrafts@gmail.com">christcenteredcrafts@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-info-card contact-info-card-centered">
+      <div class="contact-icon">⏰</div>
+      <h3>Business Hours</h3>
+      <p>We typically respond within 24 hours</p>
+      <p style="color: #40fad3; font-weight: 600;">Monday - Friday</p>
+    </div>
+  </div>
+
+  <div class="contact-form-section">
+    <h2>Send Us a Message</h2>
+    
+    {% form 'contact' %}
+      <div class="contact-form">
+        {% if form.posted_successfully? %}
+          <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center;">
+            <strong>✓ Thank you for contacting us!</strong>
+            <p style="margin: 10px 0 0; color: #155724;">We've received your message and will get back to you soon.</p>
+          </div>
+        {% endif %}
+
+        {% if form.errors %}
+          <div style="background: #f8d7da; color: #721c24; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+            <strong>Please correct the following errors:</strong>
+            <ul style="margin: 10px 0 0; padding-left: 20px;">
+              {% for field in form.errors %}
+                <li>{{ field }} - {{ form.errors.messages[field] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          <label for="ContactFormName">Name *</label>
+          <input 
+            type="text" 
+            id="ContactFormName" 
+            name="contact[name]" 
+            value="{% if form.name %}{{ form.name }}{% endif %}"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormEmail">Email *</label>
+          <input 
+            type="email" 
+            id="ContactFormEmail" 
+            name="contact[email]" 
+            value="{% if form.email %}{{ form.email }}{% endif %}"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormPhone">Phone Number</label>
+          <input 
+            type="tel" 
+            id="ContactFormPhone" 
+            name="contact[phone]" 
+            value="{% if form.phone %}{{ form.phone }}{% endif %}"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormMessage">Message *</label>
+          <textarea 
+            id="ContactFormMessage" 
+            name="contact[body]" 
+            required
+          >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="submit-button">Send Message</button>
+        </div>
+      </div>
+    {% endform %}
+  </div>
+</div>

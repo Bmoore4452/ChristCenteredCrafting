@@ -1,0 +1,453 @@
+{% layout 'theme-landing' %}
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+  <p>FOR YOUR CONVENIENCE WE ARE NOW OFFERING AFTER PAY AND SHOP PAY PAYMENT OPTIONS.</p>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Welcome to <span class="gradient-text">Christ Centered Crafts</span>
+      </h1>
+      <p class="hero-subtitle">
+        Creating meaningful, faith-inspired items that uplift, encourage, 
+        and remind us of God's presence in everyday life.
+      </p>
+      <div class="hero-buttons">
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
+        <a href="/pages/about" class="btn btn-outline">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="{{ 'christ-centered-crafts-logo.png' | asset_url }}" alt="Christ Centered Crafts Logo" width="400" height="400">
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-products">
+  <div class="section-container">
+    <h2 class="section-title">Featured Crafts</h2>
+    <p class="section-subtitle">Handmade with love and faith</p>
+    
+    <div class="products-grid">
+      {% for product in collections.featured.products limit: 4 %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" loading="lazy" width="400" height="400">
+            {% else %}
+              <div class="product-placeholder">No Image</div>
+            {% endif %}
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-price">{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% else %}
+        <p class="no-products">Coming soon! Check back for our amazing handcrafted products.</p>
+      {% endfor %}
+    </div>
+
+    <div class="view-all">
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-preview">
+  <div class="section-container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2 class="section-title">Our Mission</h2>
+        <p>
+          After much prayer and reflection, Xpress Yourself Pro officially transformed into 
+          <strong class="gradient-text">Christ Centered Crafts!</strong> This new name reflects 
+          the heart of our mission — to create meaningful, faith-inspired products that uplift, 
+          encourage, and remind us of God's presence in everyday life.
+        </p>
+        <p>
+          Same creativity, same love, but now with a deeper purpose centered around Christ. 
+          Thank you for continuing this journey with us — your support means everything!
+        </p>
+        <a href="/pages/about" class="btn btn-outline">Learn More</a>
+      </div>
+      <div class="about-image">
+        <div class="gradient-box"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+  <div class="section-container">
+    <h2 class="section-title">Stay Connected</h2>
+    <p class="section-subtitle">Get updates on new products and special offers</p>
+    
+    {% form 'customer' %}
+      <div class="newsletter-form">
+        <input type="email" name="contact[email]" placeholder="Enter your email" required class="newsletter-input">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </div>
+    {% endform %}
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Christ Centered Crafts</h3>
+      <p>Faith-inspired crafts made with love</p>
+    </div>
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{{ routes.root_url }}">Home</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+        <li><a href="/pages/about">About</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Phone: <a href="tel:803-707-5667">803-707-5667</a></p>
+      <p>Email: {{ shop.email }}</p>
+    </div>
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-links">
+        <!-- Add your social media links here -->
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ 'now' | date: "%Y" }} Christ Centered Crafts. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  /* Announcement Bar */
+  .announcement-bar {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    padding: 12px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .announcement-bar p {
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-content {
+    animation: fadeInUp 0.8s ease;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    animation: fadeIn 1s ease;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Featured Products */
+  .featured-products {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(64, 250, 211, 0.3);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .product-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #40fad3 0%, #d28df3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+  }
+
+  .product-title {
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .product-price {
+    padding: 0 1rem 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #40fad3;
+  }
+
+  .product-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .no-products {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    padding: 3rem;
+  }
+
+  .view-all {
+    text-align: center;
+  }
+
+  /* About Preview */
+  .about-preview {
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .gradient-box {
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+  }
+
+  /* Newsletter */
+  .newsletter {
+    padding: 4rem 2rem;
+    background: white;
+    text-align: center;
+  }
+
+  .newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #40fad3;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+
+  .newsletter-input:focus {
+    outline: none;
+    border-color: #d28df3;
+  }
+
+  /* Footer */
+  .main-footer {
+    background: #333;
+    color: white;
+    padding: 3rem 2rem 1rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #40fad3 0%, #d28df3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-section ul {
+    list-style: none;
+  }
+
+  .footer-section a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-section a:hover {
+    color: #40fad3;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #555;
+    color: #999;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .announcement-bar p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .hero-container,
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .newsletter-form {
+      flex-direction: column;
+    }
+  }
+</style>

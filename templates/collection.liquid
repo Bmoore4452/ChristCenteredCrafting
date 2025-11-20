@@ -1,0 +1,474 @@
+{% layout 'theme-landing' %}
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+  <p>FOR YOUR CONVENIENCE WE ARE NOW OFFERING AFTER PAY AND SHOP PAY PAYMENT OPTIONS.</p>
+</div>
+
+<!-- Collection Header -->
+<section class="collection-header">
+  <div class="section-container">
+    <h1 class="page-title">
+      {% if collection.title == 'Products' or collection.handle == 'all' %}
+        <span class="gradient-text">Our Products</span>
+      {% else %}
+        {{ collection.title }}
+      {% endif %}
+    </h1>
+    {% if collection.description != blank %}
+      <div class="collection-description">
+        {{ collection.description }}
+      </div>
+    {% else %}
+      <p class="collection-subtitle">Handmade with love and faith</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Filters and Sort -->
+<section class="collection-controls">
+  <div class="section-container">
+    <div class="controls-wrapper">
+      <div class="product-count">
+        {{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}products{% endif %}
+      </div>
+      <div class="sort-by">
+        <label for="SortBy">Sort by:</label>
+        <select id="SortBy" onchange="window.location.href=this.value">
+          <option value="?sort_by=manual">Featured</option>
+          <option value="?sort_by=best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+          <option value="?sort_by=title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>A-Z</option>
+          <option value="?sort_by=title-descending" {% if collection.sort_by == 'title-descending' %}selected{% endif %}>Z-A</option>
+          <option value="?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+          <option value="?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+          <option value="?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products Grid -->
+<section class="collection-products">
+  <div class="section-container">
+    {% if collection.products.size > 0 %}
+      <div class="products-grid">
+        {% for product in collection.products %}
+          <div class="product-card">
+            <a href="{{ product.url }}">
+              {% if product.featured_image %}
+                <div class="product-image-wrapper">
+                  <img src="{{ product.featured_image | image_url: width: 600 }}" 
+                       alt="{{ product.title }}" 
+                       loading="lazy">
+                  {% if product.images[1] %}
+                    <img src="{{ product.images[1] | image_url: width: 600 }}" 
+                         alt="{{ product.title }}" 
+                         class="product-image-hover"
+                         loading="lazy">
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="product-placeholder">No Image</div>
+              {% endif %}
+              
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                
+                {% if product.compare_at_price > product.price %}
+                  <div class="product-prices">
+                    <span class="product-price sale">{{ product.price | money }}</span>
+                    <span class="product-price-compare">{{ product.compare_at_price | money }}</span>
+                  </div>
+                {% else %}
+                  <p class="product-price">{{ product.price | money }}</p>
+                {% endif %}
+                
+                {% if product.available == false %}
+                  <p class="sold-out">Sold Out</p>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      
+      {% if paginate.pages > 1 %}
+        <div class="pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}" class="pagination-link">&laquo; Previous</a>
+          {% endif %}
+          
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+            {% else %}
+              <span class="pagination-current">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+          
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}" class="pagination-link">Next &raquo;</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="no-products">
+        <p>No products found in this collection.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">View All Products</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% paginate collection.products by 16 %}
+{% endpaginate %}
+
+<style>
+  /* Announcement Bar */
+  .announcement-bar {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    padding: 12px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .announcement-bar p {
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Collection Header */
+  .collection-header {
+    padding: 3rem 2rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    text-align: center;
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+
+  .collection-description {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .collection-subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  /* Controls */
+  .collection-controls {
+    padding: 1.5rem 2rem;
+    background: white;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  .controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .product-count {
+    color: #666;
+    font-size: 1rem;
+  }
+
+  .sort-by {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sort-by label {
+    color: #666;
+    font-size: 1rem;
+  }
+
+  .sort-by select {
+    padding: 8px 12px;
+    border: 2px solid #40fad3;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+
+  .sort-by select:focus {
+    outline: none;
+    border-color: #d28df3;
+  }
+
+  /* Products Section */
+  .collection-products {
+    padding: 3rem 2rem;
+    background: white;
+    min-height: 400px;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(64, 250, 211, 0.3);
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+
+  .product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  .product-card:hover .product-image-hover {
+    opacity: 1;
+  }
+
+  .product-placeholder {
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(135deg, #40fad3 0%, #d28df3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .product-info {
+    padding: 1.25rem;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    min-height: 2.8em;
+  }
+
+  .product-price {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #d28df3;
+    margin: 0;
+  }
+
+  .product-prices {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .product-price.sale {
+    color: #e63946;
+  }
+
+  .product-price-compare {
+    font-size: 1.1rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  .sold-out {
+    color: #e63946;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .product-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* No Products */
+  .no-products {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .no-products p {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+  }
+
+  .pagination-link,
+  .pagination-current {
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .pagination-link {
+    background: white;
+    color: #40fad3;
+    border: 2px solid #40fad3;
+  }
+
+  .pagination-link:hover {
+    background: linear-gradient(90deg, #40fad3 0%, #d28df3 100%);
+    color: white;
+    border-color: transparent;
+  }
+
+  .pagination-current {
+    background: linear-gradient(90deg, #40fad3 0%, #d28df3 100%);
+    color: white;
+    border: 2px solid transparent;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(90deg, #40fad3 0%, #d28df3 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(64, 250, 211, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(64, 250, 211, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .announcement-bar p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .collection-subtitle,
+    .collection-description {
+      font-size: 1rem;
+    }
+
+    .controls-wrapper {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .sort-by {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .sort-by select {
+      flex: 1;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .product-image-wrapper {
+      height: 200px;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 0.95rem;
+      min-height: auto;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+    }
+  }
+</style>
