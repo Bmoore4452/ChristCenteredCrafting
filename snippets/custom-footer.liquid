@@ -1,0 +1,190 @@
+<!-- Custom Footer -->
+<footer class="custom-footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Christ Centered Crafts</h3>
+      <p>items that uplift, encourage, and remind us of God's presence in everyday life.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{{ routes.root_url }}">Home</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+        <li><a href="/pages/about">About</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Phone: <a href="tel:803-707-5667">803-707-5667</a></p>
+      <p>Email: <a href="mailto:christcenteredcrafts@gmail.com">christcenteredcrafts@gmail.com</a></p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-links">
+        <a href="#" class="social-link">Facebook</a>
+        <a href="#" class="social-link">Instagram</a>
+        <a href="#" class="social-link">TikTok</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Icons -->
+  <div class="footer-payment-section">
+    <div class="payment-icons">
+      {{ 'american_express' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'apple_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'diners_club' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'discover' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'google_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'paypal' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'shopify_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+      {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }}, Christ Centered Crafts Powered by Shopify</p>
+  </div>
+</footer>
+
+<style>
+  /* Custom Footer Styles */
+  .custom-footer {
+    background: #333;
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 4rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #40fad3 0%, #d28df3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .footer-section p {
+    color: #ddd;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-section a:hover {
+    color: #40fad3;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: #40fad3;
+  }
+
+  /* Payment Icons Section */
+  .footer-payment-section {
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2rem 0 1rem;
+  }
+
+  .payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .payment-icon {
+    height: 35px;
+    width: auto;
+    max-width: 55px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #555;
+    color: #999;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .custom-footer {
+      padding: 2rem 1rem 1rem;
+    }
+
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .social-links {
+      align-items: center;
+    }
+
+    .payment-icons {
+      gap: 0.8rem;
+    }
+
+    .payment-icon {
+      height: 28px;
+      max-width: 45px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.85rem;
+    }
+  }
+</style>
