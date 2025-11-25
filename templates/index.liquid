@@ -33,22 +33,64 @@
     <h2 class="section-title">Featured Crafts</h2>
     <p class="section-subtitle">Handmade with love and faith</p>
     
-    <div class="products-grid">
-      {% for product in collections.featured.products limit: 4 %}
-        <div class="product-card">
-          <a href="{{ product.url }}">
-            {% if product.featured_image %}
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" loading="lazy" width="400" height="400">
-            {% else %}
-              <div class="product-placeholder">No Image</div>
-            {% endif %}
-            <h3 class="product-title">{{ product.title }}</h3>
-            <p class="product-price">{{ product.price | money }}</p>
-          </a>
+    <!-- Product Slideshow -->
+    <div class="slideshow-container">
+      <div class="slideshow-wrapper">
+        
+        <!-- Slide 1 - Memorial Bench -->
+        <div class="slide active">
+          <div class="slide-content">
+            <div class="slide-image">
+              <img src="{{ 'thumbnail_91.jpg' | asset_url }}" alt="Custom Memorial Bench" loading="lazy">
+            </div>
+            <div class="slide-info">
+              <h3 class="slide-title">Custom Memorial Benches</h3>
+              <p class="slide-description">Beautiful personalized memorial benches with custom photo designs. Honor your loved ones with a lasting tribute.</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
         </div>
-      {% else %}
-        <p class="no-products">Coming soon! Check back for our amazing handcrafted products.</p>
-      {% endfor %}
+
+        <!-- Slide 2 - Tumbler -->
+        <div class="slide">
+          <div class="slide-content">
+            <div class="slide-image">
+              <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Custom Glitter Tumbler" loading="lazy">
+            </div>
+            <div class="slide-info">
+              <h3 class="slide-title">Custom Glitter Tumblers</h3>
+              <p class="slide-description">Personalized 20oz glitter tumblers with your favorite designs. Perfect for keeping drinks hot or cold in style!</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 - Shirt -->
+        <div class="slide">
+          <div class="slide-content">
+            <div class="slide-image">
+              <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Rhinestone T-Shirt" loading="lazy">
+            </div>
+            <div class="slide-info">
+              <h3 class="slide-title">Custom Rhinestone Apparel</h3>
+              <p class="slide-description">Stunning rhinestone designs on premium quality shirts. Express yourself with faith-inspired bling!</p>
+              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="slide-prev" onclick="changeSlide(-1)">❮</button>
+      <button class="slide-next" onclick="changeSlide(1)">❯</button>
+
+      <!-- Dots -->
+      <div class="slide-dots">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+      </div>
     </div>
 
     <div class="view-all">
@@ -56,6 +98,83 @@
     </div>
   </div>
 </section>
+
+<script>
+  let currentSlide = 0;
+  let slideInterval;
+
+  function showSlide(n) {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (n >= slides.length) { currentSlide = 0; }
+    if (n < 0) { currentSlide = slides.length - 1; }
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function changeSlide(direction) {
+    currentSlide += direction;
+    showSlide(currentSlide);
+    resetTimer();
+  }
+
+  function goToSlide(n) {
+    currentSlide = n;
+    showSlide(currentSlide);
+    resetTimer();
+  }
+
+  function autoSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+  }
+
+  function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(autoSlide, 5000);
+  }
+
+  // Start auto-sliding
+  slideInterval = setInterval(autoSlide, 5000);
+
+  // Pause on hover
+  document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+  });
+
+  document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
+    slideInterval = setInterval(autoSlide, 6000);
+  });
+
+  // Scroll-triggered entrance animation
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe featured section elements
+  const featuredSection = document.querySelector('.featured-products');
+  const sectionTitle = featuredSection.querySelector('.section-title');
+  const sectionSubtitle = featuredSection.querySelector('.section-subtitle');
+  const slideshowContainer = featuredSection.querySelector('.slideshow-container');
+  
+  observer.observe(sectionTitle);
+  observer.observe(sectionSubtitle);
+  observer.observe(slideshowContainer);
+</script>
 
 <!-- About Section -->
 <section class="about-preview">
@@ -76,7 +195,7 @@
         <a href="/pages/about" class="btn btn-outline">Learn More</a>
       </div>
       <div class="about-image">
-        <div class="gradient-box"></div>
+        <img src="{{ 'event.jpg' | asset_url }}" alt="Rhinestone T-Shirt" loading="lazy">
       </div>
     </div>
   </div>
@@ -187,9 +306,19 @@
     text-align: center;
     margin-bottom: 1rem;
     background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: shimmer 3s linear infinite;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .section-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .section-subtitle {
@@ -197,6 +326,252 @@
     color: #666;
     font-size: 1.1rem;
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.2s;
+  }
+
+  .section-subtitle.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Slideshow Styles */
+  .slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto 3rem;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(64, 250, 211, 0.1) 0%, rgba(145, 189, 228, 0.1) 25%, rgba(210, 141, 243, 0.1) 50%, rgba(253, 110, 252, 0.1) 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 1s ease 0.4s;
+  }
+
+  .slideshow-container.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .slideshow-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    animation: fadeSlide 1s ease-in-out;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  .slide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem;
+    min-height: 500px;
+    border: 8px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+            linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%) border-box;
+        background-size: 200% 200%;
+
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .slide-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    animation: kenBurns 20s ease-in-out infinite alternate;
+  }
+
+  .slide:hover .slide-image img {
+    animation-play-state: paused;
+    transform: scale(1.08);
+  }
+
+  .slide-info {
+    padding: 2rem;
+    animation: slideInRight 0.8s ease;
+  }
+
+  .slide-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    line-height: 1.2;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .slide-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  /* Navigation Arrows */
+  .slide-prev,
+  .slide-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #40fad3 0%, #d28df3 100%);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(64, 250, 211, 0.4);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  .slide-prev:hover,
+  .slide-next:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(64, 250, 211, 0.8);
+    animation: none;
+  }
+
+  .slide-prev {
+    left: 2rem;
+  }
+
+  .slide-next {
+    right: 2rem;
+  }
+
+  /* Dots */
+  .slide-dots {
+    text-align: center;
+    padding: 1.5rem 0;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(64, 250, 211, 0.8);
+  }
+
+  .dot.active {
+    background: linear-gradient(135deg, #40fad3 0%, #d28df3 100%);
+    width: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(64, 250, 211, 0.6);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  .dot:hover {
+    background: rgba(64, 250, 211, 0.8);
+    transform: scale(1.2);
+  }
+
+  /* Animations */
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes kenBurns {
+    0% {
+      transform: scale(1) translate(0, 0);
+    }
+    50% {
+      transform: scale(1.1) translate(-2%, -2%);
+    }
+    100% {
+      transform: scale(1) translate(0, 0);
+    }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow: 0 4px 15px rgba(64, 250, 211, 0.4);
+    }
+    50% {
+      box-shadow: 0 4px 25px rgba(64, 250, 211, 0.8), 0 0 30px rgba(210, 141, 243, 0.6);
+    }
   }
 
   .products-grid {
@@ -265,6 +640,63 @@
     text-align: center;
   }
 
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .slide-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem 1.5rem;
+      min-height: auto;
+    }
+
+    .slide-image {
+      order: -1;
+    }
+
+    .slide-image img {
+      height: 300px;
+    }
+
+    .slide-title {
+      font-size: 1.8rem;
+
+    }
+
+    .slide-description {
+      font-size: 1rem;
+    }
+
+    .slide-prev,
+    .slide-next {
+      width: 40px;
+      height: 40px;
+      padding: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .slide-prev {
+      left: 1rem;
+    }
+
+    .slide-next {
+      right: 1rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+    }
+
+    .dot.active {
+      width: 30px;
+    }
+
+    .slideshow-wrapper {
+      min-height: auto;
+    }
+  }
+
   /* About Preview */
   .about-preview {
     padding: 4rem 2rem;
@@ -290,6 +722,13 @@
     height: 400px;
     border-radius: 20px;
     background: linear-gradient(135deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+  }
+
+  .about-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease;
   }
 
   /* Newsletter */
