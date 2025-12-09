@@ -6,23 +6,32 @@
 </div>
 
 <!-- Hero Section -->
-<section class="hero">
-  <div class="hero-container">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        Welcome to <span class="gradient-text">Christ Centered Crafts</span>
+<section class="hero-fullscreen-graffiti">
+  <div class="hero-background-overlay"></div>
+  <div class="hero-content-split">
+    <div class="hero-text-left">
+      <h1 class="hero-headline">
+        <span class="highlight-text">It's your faith,<br>
+        it's time to wear it</span>
       </h1>
-      <p class="hero-subtitle">
-        Creating meaningful, faith-inspired items that uplift, encourage, 
-        and remind us of God's presence in everyday life.
+      <p class="hero-description">
+        Christ Centered Crafts creates meaningful, faith-inspired items 
+        that uplift, encourage, and celebrate your journey with God.
       </p>
-      <div class="hero-buttons">
-        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
-        <a href="/pages/about" class="btn btn-outline">Our Story</a>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-hero-cta">SHOP NOW FOR FREE SHIPPING</a>
+      <div class="hero-social-proof">
+        <div class="social-proof-avatars">
+          <span class="avatar">👤</span>
+          <span class="avatar">👤</span>
+          <span class="avatar">👤</span>
+        </div>
+        <p class="social-proof-text">Join hundreds of believers who have already ordered</p>
       </div>
     </div>
-    <div class="hero-image">
-      <img src="{{ 'christ-centered-crafts-logo.png' | asset_url }}" alt="Christ Centered Crafts Logo" width="400" height="400">
+    <div class="hero-logo-right">
+      <div class="hero-logo-featured">
+        <img src="{{ 'christ-centered-crafts-logo.png' | asset_url }}" alt="Christ Centered Crafts Logo" width="400" height="400">
+      </div>
     </div>
   </div>
 </section>
@@ -33,63 +42,43 @@
     <h2 class="section-title">Featured Crafts</h2>
     <p class="section-subtitle">Handmade with love and faith</p>
     
-    <!-- Product Slideshow -->
-    <div class="slideshow-container">
-      <div class="slideshow-wrapper">
-        
-        <!-- Slide 1 - Memorial Bench -->
-        <div class="slide active">
-          <div class="slide-content">
-            <div class="slide-image">
-              <img src="{{ 'thumbnail_91.jpg' | asset_url }}" alt="Custom Memorial Bench" loading="lazy">
-            </div>
-            <div class="slide-info">
-              <h3 class="slide-title">Custom Memorial Benches</h3>
-              <p class="slide-description">Beautiful personalized memorial benches with custom photo designs. Honor your loved ones with a lasting tribute.</p>
-              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
-            </div>
+    <!-- Product Gallery with Thumbnails -->
+    <div class="gallery-container">
+      
+      <!-- Main Display Area -->
+      <div class="gallery-main">
+        <div class="gallery-display active" data-product="0">
+          <div class="gallery-image-wrapper">
+            <img src="{{ 'thumbnail_91.jpg' | asset_url }}" alt="Custom Memorial Bench" loading="lazy">
+          </div>
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Custom Memorial Benches</h3>
+            <p class="gallery-description">Beautiful personalized memorial benches with custom photo designs. Honor your loved ones with a lasting tribute.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
 
-        <!-- Slide 2 - Tumbler -->
-        <div class="slide">
-          <div class="slide-content">
-            <div class="slide-image">
-              <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Custom Glitter Tumbler" loading="lazy">
-            </div>
-            <div class="slide-info">
-              <h3 class="slide-title">Custom Glitter Tumblers</h3>
-              <p class="slide-description">Personalized 20oz glitter tumblers with your favorite designs. Perfect for keeping drinks hot or cold in style!</p>
-              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
-            </div>
+        <div class="gallery-display" data-product="1">
+          <div class="gallery-image-wrapper">
+            <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Custom Glitter Tumbler" loading="lazy">
+          </div>
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Custom Glitter Tumblers</h3>
+            <p class="gallery-description">Personalized 20oz glitter tumblers with your favorite designs. Perfect for keeping drinks hot or cold in style!</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
 
-        <!-- Slide 3 - Shirt -->
-        <div class="slide">
-          <div class="slide-content">
-            <div class="slide-image">
-              <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Rhinestone T-Shirt" loading="lazy">
-            </div>
-            <div class="slide-info">
-              <h3 class="slide-title">Custom Rhinestone Apparel</h3>
-              <p class="slide-description">Stunning rhinestone designs on premium quality shirts. Express yourself with faith-inspired bling!</p>
-              <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
-            </div>
+        <div class="gallery-display" data-product="2">
+          <div class="gallery-image-wrapper">
+            <img src="{{ 'keepGodFirst.jpg' | asset_url }}" alt="Rhinestone T-Shirt" loading="lazy">
+          </div>
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">Custom Rhinestone Apparel</h3>
+            <p class="gallery-description">Stunning rhinestone designs on premium quality shirts. Express yourself with faith-inspired bling!</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">Shop Now</a>
           </div>
         </div>
-
-      </div>
-
-      <!-- Navigation Arrows -->
-      <button class="slide-prev" onclick="changeSlide(-1)">❮</button>
-      <button class="slide-next" onclick="changeSlide(1)">❯</button>
-
-      <!-- Dots -->
-      <div class="slide-dots">
-        <span class="dot active" onclick="goToSlide(0)"></span>
-        <span class="dot" onclick="goToSlide(1)"></span>
-        <span class="dot" onclick="goToSlide(2)"></span>
       </div>
     </div>
 
@@ -100,55 +89,67 @@
 </section>
 
 <script>
-  let currentSlide = 0;
-  let slideInterval;
+  let currentProduct = 0;
+  let autoPlayInterval;
+  let isTransitioning = false;
+  const totalProducts = 3;
 
-  function showSlide(n) {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+  function selectProduct(index) {
+    if (isTransitioning || index === currentProduct) return;
     
-    if (n >= slides.length) { currentSlide = 0; }
-    if (n < 0) { currentSlide = slides.length - 1; }
+    isTransitioning = true;
+    const displays = document.querySelectorAll('.gallery-display');
+    const galleryMain = document.querySelector('.gallery-main');
+    const galleryRect = galleryMain.getBoundingClientRect();
     
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
+    // Calculate position based on product index (simulate thumbnail positions)
+    // Left (-40%), Center (0%), Right (40%) of gallery width
+    const positions = [-0.4, 0, 0.4];
+    const offsetX = positions[index] * galleryRect.width;
+    const offsetY = galleryRect.height * 0.4; // Come from bottom
     
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+    // Set CSS custom properties for the incoming display
+    displays[index].style.setProperty('--genie-x', `${offsetX}px`);
+    displays[index].style.setProperty('--genie-y', `${offsetY}px`);
+    
+    // Add genie-out effect to current display
+    displays[currentProduct].classList.add('genie-out');
+    
+    // Wait for genie-out animation, then switch
+    setTimeout(() => {
+      // Remove active and genie-out from all
+      displays.forEach(display => {
+        display.classList.remove('active', 'genie-out');
+      });
+      
+      // Add active class to selected
+      displays[index].classList.add('active');
+      
+      currentProduct = index;
+      
+      // Allow next transition after genie-in completes
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    }, 600);
   }
 
-  function changeSlide(direction) {
-    currentSlide += direction;
-    showSlide(currentSlide);
-    resetTimer();
+  function nextProduct() {
+    const nextIndex = (currentProduct + 1) % totalProducts;
+    selectProduct(nextIndex);
   }
 
-  function goToSlide(n) {
-    currentSlide = n;
-    showSlide(currentSlide);
-    resetTimer();
-  }
-
-  function autoSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-  }
-
-  function resetTimer() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(autoSlide, 5000);
-  }
-
-  // Start auto-sliding
-  slideInterval = setInterval(autoSlide, 5000);
+  // Start auto-play (4 seconds)
+  autoPlayInterval = setInterval(nextProduct, 4000);
 
   // Pause on hover
-  document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
-    clearInterval(slideInterval);
+  const galleryContainer = document.querySelector('.gallery-container');
+  galleryContainer.addEventListener('mouseenter', () => {
+    clearInterval(autoPlayInterval);
   });
 
-  document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
-    slideInterval = setInterval(autoSlide, 6000);
+  galleryContainer.addEventListener('mouseleave', () => {
+    autoPlayInterval = setInterval(nextProduct, 4000);
   });
 
   // Scroll-triggered entrance animation
@@ -169,11 +170,11 @@
   const featuredSection = document.querySelector('.featured-products');
   const sectionTitle = featuredSection.querySelector('.section-title');
   const sectionSubtitle = featuredSection.querySelector('.section-subtitle');
-  const slideshowContainer = featuredSection.querySelector('.slideshow-container');
+  const galleryContainerObs = featuredSection.querySelector('.gallery-container');
   
   observer.observe(sectionTitle);
   observer.observe(sectionSubtitle);
-  observer.observe(slideshowContainer);
+  observer.observe(galleryContainerObs);
 </script>
 
 <!-- About Section -->
@@ -239,7 +240,212 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
-  /* Hero Section */
+  /* Fullscreen Graffiti Hero Section */
+  .hero-fullscreen-graffiti {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('{{ 'CCC_bg.png' | asset_url }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+  }
+
+  .hero-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .hero-content-centered {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease;
+  }
+
+  .hero-content-split {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-text-left {
+    text-align: left;
+    animation: fadeInUp 1s ease;
+  }
+
+  .hero-logo-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease 0.3s backwards;
+  }
+
+  .hero-logo-featured {
+    margin-bottom: 2rem;
+    animation: float 3s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 1);
+    width: 500px;
+    height: 500px;
+  }
+
+  .hero-logo-right .hero-logo-featured {
+    margin-bottom: 0;
+  }
+
+  .hero-logo-featured img {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    display: block;
+  }
+  }
+
+  .hero-headline {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease 0.2s backwards;
+  }
+
+  .hero-text-left .hero-headline {
+    text-align: left;
+  }
+
+  .highlight-text {
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .hero-description {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease 0.4s backwards;
+  }
+
+  .hero-text-left .hero-description {
+    text-align: left;
+  }
+
+  .btn-hero-cta {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 25%, #d28df3 50%, #fd6efc 75%, #40fad3 100%);
+    background-size: 300% 100%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(64, 250, 211, 0.4);
+    animation: fadeInUp 1s ease 0.6s backwards, waveShimmer 4s ease-in-out infinite;
+  }
+
+  .btn-hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(64, 250, 211, 0.6);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  @keyframes waveShimmer {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  .hero-social-proof {
+    margin-top: 3rem;
+    animation: fadeInUp 1s ease 0.8s backwards;
+  }
+
+  .hero-text-left .hero-social-proof {
+    text-align: left;
+  }
+
+  .social-proof-avatars {
+    display: flex;
+    justify-content: center;
+    gap: -10px;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text-left .social-proof-avatars {
+    justify-content: flex-start;
+  }
+
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #40fad3, #fd6efc);
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    margin-left: -10px;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .avatar:first-child {
+    margin-left: 0;
+  }
+
+  .social-proof-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  /* Old Hero Section - Keeping for fallback */
   .hero {
     padding: 4rem 2rem;
     background: rgba(255, 255, 255, 0.95);
@@ -336,41 +542,123 @@
     transform: translateY(0);
   }
 
-  /* Slideshow Styles */
-  .slideshow-container {
+  /* Gallery Styles */
+  .gallery-container {
     position: relative;
     max-width: 100%;
     margin: 0 auto 3rem;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, rgba(64, 250, 211, 0.1) 0%, rgba(145, 189, 228, 0.1) 25%, rgba(210, 141, 243, 0.1) 50%, rgba(253, 110, 252, 0.1) 100%);
-    background-size: 400% 400%;
-    animation: gradientFlow 15s ease infinite;
     opacity: 0;
     transform: translateY(30px) scale(0.95);
     transition: all 1s ease 0.4s;
   }
 
-  .slideshow-container.animate-in {
+  .gallery-container.animate-in {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 
-  .slideshow-wrapper {
+  /* Main Display Area */
+  .gallery-main {
     position: relative;
     width: 100%;
-    min-height: 500px;
+    height: 80vh;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(64, 250, 211, 0.05) 0%, rgba(210, 141, 243, 0.05) 100%);
   }
 
-  .slide {
-    display: none;
+  .gallery-display {
+    position: absolute;
     width: 100%;
-    animation: fadeSlide 1s ease-in-out;
+    height: 100%;
+    opacity: 0;
+    --genie-x: 0px;
+    --genie-y: 300px;
+    transform: scale(0.15) translate(var(--genie-x), var(--genie-y));
+    clip-path: inset(42% 42% 42% 42% round 15px);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
   }
 
-  .slide.active {
-    display: block;
+  .gallery-display.active {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+    clip-path: inset(0% 0% 0% 0% round 20px);
+    pointer-events: auto;
+  }
+
+  .gallery-display.genie-out {
+    opacity: 0;
+    transform: scale(0.15) translate(var(--genie-x), var(--genie-y));
+    clip-path: inset(42% 42% 42% 42% round 15px);
+    transition: all 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+
+  .gallery-image-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transform-origin: center bottom;
+  }
+
+  .gallery-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: kenBurns 20s ease-in-out infinite alternate;
+    transform-origin: center center;
+  }
+
+  .gallery-display.active .gallery-image-wrapper img {
+    animation-play-state: running;
+  }
+
+  /* Overlay with Product Info */
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease 0.5s;
+  }
+
+  .gallery-display.active .gallery-overlay {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .gallery-display.genie-out .gallery-overlay {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    background: linear-gradient(90deg, #40fad3 0%, #91bde4 33%, #d28df3 66%, #fd6efc 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .gallery-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
   }
 
   .slide-content {
@@ -642,58 +930,20 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    .slide-content {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+    .gallery-main {
+      height: 500px;
+    }
+
+    .gallery-overlay {
       padding: 2rem 1.5rem;
-      min-height: auto;
     }
 
-    .slide-image {
-      order: -1;
-    }
-
-    .slide-image img {
-      height: 300px;
-    }
-
-    .slide-title {
+    .gallery-title {
       font-size: 1.8rem;
-
     }
 
-    .slide-description {
+    .gallery-description {
       font-size: 1rem;
-    }
-
-    .slide-prev,
-    .slide-next {
-      width: 40px;
-      height: 40px;
-      padding: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .slide-prev {
-      left: 1rem;
-    }
-
-    .slide-next {
-      right: 1rem;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      margin: 0 5px;
-    }
-
-    .dot.active {
-      width: 30px;
-    }
-
-    .slideshow-wrapper {
-      min-height: auto;
     }
   }
 
@@ -779,6 +1029,15 @@
     }
   }
 
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .announcement-bar p {
@@ -786,6 +1045,82 @@
       line-height: 1.4;
     }
 
+    /* Graffiti Hero Mobile */
+    .hero-fullscreen-graffiti {
+      background-attachment: scroll;
+      min-height: 100vh;
+    }
+
+    .hero-content-centered,
+    .hero-content-split {
+      padding: 1.5rem;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-text-left {
+      text-align: center;
+    }
+
+    .hero-text-left .hero-headline,
+    .hero-text-left .hero-description {
+      text-align: center;
+    }
+
+    .hero-text-left .hero-social-proof {
+      text-align: center;
+    }
+
+    .hero-text-left .social-proof-avatars {
+      justify-content: center;
+    }
+
+    .hero-logo-right {
+      order: -1;
+    }
+
+    .hero-logo-featured {
+      padding: 2rem;
+      width: 280px;
+      height: 280px;
+    }
+
+    .hero-logo-featured img {
+      max-width: 200px;
+      max-height: 200px;
+    }
+
+    .hero-headline {
+      font-size: 2.5rem;
+      line-height: 1.2;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .btn-hero-cta {
+      padding: 1rem 2rem;
+      font-size: 0.95rem;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
+    }
+
+    .social-proof-text {
+      font-size: 0.85rem;
+    }
+
+    /* Old sections */
     .hero-container,
     .about-content {
       grid-template-columns: 1fr;
